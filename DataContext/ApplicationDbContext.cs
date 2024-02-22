@@ -12,4 +12,5 @@ namespace LoginDemo1.DataContext
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Roles> Roles { get; set; }
     }
+    
 }

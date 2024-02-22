@@ -90,12 +90,8 @@ namespace LoginDemo1.Controllers
                         MobileNumberExists = true,
                         Username = null,
                         Token = null
-
                     };
-                   
-                }
-
-                
+                } 
                 return Ok(message);
             }
             _context.User.Add(user1);
@@ -111,7 +107,7 @@ namespace LoginDemo1.Controllers
                     //JWTID
                     //new Claim("AccessKey",Guid.NewGuid().ToString())
                 };
-                token=GenerateJWTToken(authClaim);
+                token=Jwt.GenerateJWTToken(authClaim,_configuration);
                 message = new SignUpMessageModel()
                 {
                     EmailExists=false,
@@ -135,21 +131,7 @@ namespace LoginDemo1.Controllers
             _context.SaveChanges();
             return Ok();
         }
-        [NonAction]
-        public string GenerateJWTToken(List<Claim> authClaims)
-        {
-            
-            var authSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]!));
-            var tokenObject = new JwtSecurityToken(
-               issuer: _configuration["JWT:ValidIssuer"],
-               audience: _configuration["JWT:ValidAudience"],
-               expires: DateTime.Now.AddDays(2),
-               claims: authClaims,
-               signingCredentials: new SigningCredentials(authSecret, SecurityAlgorithms.HmacSha256)
-               );
-
-            string token = new JwtSecurityTokenHandler().WriteToken(tokenObject);
-            return token;
-        }
+        
+        
     }
 }

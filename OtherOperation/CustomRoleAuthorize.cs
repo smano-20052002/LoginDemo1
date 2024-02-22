@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace LoginDemo1.OtherOperation
 {
@@ -15,26 +16,27 @@ namespace LoginDemo1.OtherOperation
         }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var jwtToken = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             var tokenHandler = new JwtSecurityTokenHandler();
-            var payload= tokenHandler.ReadJwtToken(jwtToken).RawPayload;
-            dynamic JsonPayload= JsonConvert.DeserializeObject(payload)!;
+            var payload = JsonConvert.SerializeObject(tokenHandler.ReadJwtToken(token).Payload);
+            //dynamic PayloadString = JsonConvert.SerializeObject(payload);
+            dynamic JsonPayload = JsonConvert.DeserializeObject(payload)!;
             string Role = JsonPayload.Role;
             if (Role != null)
             {
-                if (Role == _role)
-                {
-                    context.Result = new RedirectToActionResult("Get", "WeatherForecast", null);
-                    return;
-                }
-                
+              if (Role == _role)
+            {
+                   
+              return;
+            }
+
             }
             else
             {
-                context.Result = new NotFoundResult();
-                return;
-            }
-
+               context.Result = new NotFoundResult();
+              return;
+           }
+           
         }
     }
 }

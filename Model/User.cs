@@ -22,7 +22,7 @@ namespace LoginDemo1.Model
         [DefaultValue(0)]
         public int AccessFailedCount { get; set; }
 
-        public ICollection<UserRole> userrole { get; } = new List<UserRole>(); // Collection navigation containing dependents
+        public ICollection<UserRole> userrole { get; }  // Collection navigation containing dependents
 
     }
 }

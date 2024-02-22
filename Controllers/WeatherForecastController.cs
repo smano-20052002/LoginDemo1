@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using LoginDemo1.OtherOperation;
 using LoginDemo1.DataContext;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using LoginDemo1.Model;
+using System.Security.Claims;
 
 namespace LoginDemo1.Controllers
 
@@ -25,19 +30,26 @@ namespace LoginDemo1.Controllers
         [HttpGet]
 
         //[CustomRoleAuthorizeAttributes("430a9459-e1e5-47b8-9a91-e299df67bd41")]
-
+        
         [CustomRoleAuthorize("430a9459-e1e5-47b8-9a91-e299df67bd41")]
-        public IEnumerable<WeatherForecast> Get()
+        [Route("/api/WeatherForecast")]
+        public IActionResult Get()
         {
+            var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            if (!string.IsNullOrEmpty(token))
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+                var j = jsonToken.Payload;
+               
+                return Ok(j);
+            }
+            return Ok();
+            
+
+
+            
         }
     }
 }

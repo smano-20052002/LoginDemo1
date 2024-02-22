@@ -12,3 +12,10 @@
     //}
     //return stringBuilder;
 //};
+
+var token= HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var payload = JsonConvert.SerializeObject(tokenHandler.ReadJwtToken(token).Payload);
+            //dynamic PayloadString = JsonConvert.SerializeObject(payload);
+            dynamic JsonPayload = JsonConvert.DeserializeObject(payload)!;
+            string Role = JsonPayload.Role;

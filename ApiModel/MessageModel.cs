@@ -10,9 +10,9 @@
     }
     public class AuthMessageModel
     {
-        public bool accountexists { get; set; }
-        public bool passwordstatus { get; set; }
-        public string token { get; set; }
+        public bool AccountExists { get; set; }
+        public bool PasswordStatus { get; set; }
+        public string Token { get; set; }
 
     }
 }

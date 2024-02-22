@@ -54,8 +54,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseRouting();
+app.UseAuthorization();
 
 //start
 
