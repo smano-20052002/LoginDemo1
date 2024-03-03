@@ -24,6 +24,7 @@ namespace LoginDemo1.Controllers
             _configuration = configuration;
         }
         [HttpPost]
+        
         public IActionResult LoginUser([FromBody]LoginModel loginuser)
         {
             AuthMessageModel authmessage ;
@@ -32,9 +33,11 @@ namespace LoginDemo1.Controllers
                 if (_context.User.Any(user => user.Email == loginuser.Email))
                 {
                     User user =   _context.User.Where(user => user.Email == loginuser.Email).FirstOrDefault()!;                                 
-                    if (user.Password==loginuser.Password)
+                    if (user.Password== SHA256Encrypt.ComputePasswordToSha256Hash(loginuser.Password))
                     {
-                        var userroleid = _context.UserRole.Where(userrole => userrole.User == user).Select(user => user.Id).FirstOrDefault()!;
+                        var userroleid = _context.UserRole.Where(userrole => userrole.User == user)
+                            .Select(user => user.Id)
+                            .FirstOrDefault()!;
                         var roleid = _context.UserRole.Where(ur => ur.Id == userroleid) // Filter by userrole id
                                                       .Select(ur => ur.Role.RolesId) // Select the role id
                                                       .FirstOrDefault();
