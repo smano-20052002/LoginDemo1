@@ -65,7 +65,7 @@ namespace LoginDemo1.Controllers
                     {
                         EmailExists= true,
                         MobileNumberExists= false,
-                        Username=null,
+                        //Username=null,
                         Token=null
 
                     };
@@ -76,7 +76,7 @@ namespace LoginDemo1.Controllers
                     {
                         EmailExists = false,
                         MobileNumberExists = true,
-                        Username = null,
+                       // Username = null,
                         Token = null
 
                     };
@@ -88,7 +88,7 @@ namespace LoginDemo1.Controllers
                     {
                         EmailExists = true,
                         MobileNumberExists = true,
-                        Username = null,
+                        //Username = null,
                         Token = null
                     };
                 } 
@@ -113,7 +113,7 @@ namespace LoginDemo1.Controllers
                     EmailExists=false,
                     MobileNumberExists=false,
                     Token=token,
-                    Username=resuser.UserName 
+                   // Username=resuser.UserName 
                 };
                 return Ok(message);
             }

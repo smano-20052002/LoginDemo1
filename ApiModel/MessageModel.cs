@@ -5,7 +5,7 @@
         public bool EmailExists { get; set; }
         public bool MobileNumberExists { get; set; }
         public string Token { get; set; }
-        public string Username { get; set; }
+       // public string Username { get; set; }
 
     }
     public class AuthMessageModel

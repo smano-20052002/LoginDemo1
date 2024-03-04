@@ -19,13 +19,13 @@ namespace LoginDemo1.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IConfiguration _configuration;
+       // private readonly ILogger<WeatherForecastController> _logger;
+        //private readonly IConfiguration _configuration;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,IConfiguration configuration)
+        public WeatherForecastController()
         {
-            _logger = logger;
-            _configuration = configuration;
+           
+            //_configuration = configuration;
         }
         [HttpGet]
 
@@ -35,17 +35,10 @@ namespace LoginDemo1.Controllers
         [Route("/api/WeatherForecast")]
         public IActionResult Get()
         {
+
             var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-            if (!string.IsNullOrEmpty(token))
-            {
-                var handler = new JwtSecurityTokenHandler();
-                var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
-                var j = jsonToken.Payload;
-               
-                return Ok(j);
-            }
-            return Ok();
+            return Ok(token);
             
 
 
