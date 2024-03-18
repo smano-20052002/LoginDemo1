@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using LoginDemo1.Model;
+// using LoginDemo1.Model;
 
 namespace LoginDemo1.DataContext
 {
@@ -11,6 +12,8 @@ namespace LoginDemo1.DataContext
         public DbSet<User> User { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Roles> Roles { get; set; }
+     
+        
     }
     
 }

@@ -15,4 +15,15 @@
         public string Token { get; set; }
 
     }
+    public class ChangePasswordMessage
+    {
+        public bool EmailExists { get; set; }
+        public bool Passcheck { get; set; }
+
+    }
+    public class ForgetPasswordMessage
+    {
+        public bool EmailExists { get; set; }
+        public bool SendMail { get; set; }
+    }
 }

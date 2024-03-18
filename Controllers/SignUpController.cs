@@ -20,8 +20,8 @@ namespace LoginDemo1.Controllers
     public class SignUpController : ControllerBase
 
     {
-        private ApplicationDbContext _context;
-        private IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
         public SignUpController(ApplicationDbContext context,IConfiguration configuration) 
         {
             _context = context;

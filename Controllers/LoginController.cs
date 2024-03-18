@@ -16,8 +16,8 @@ namespace LoginDemo1.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private ApplicationDbContext _context;
-        private IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
         public LoginController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;

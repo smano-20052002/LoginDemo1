@@ -24,7 +24,6 @@ namespace LoginDemo1.Controllers
 
         public WeatherForecastController()
         {
-           
             //_configuration = configuration;
         }
         [HttpGet]
